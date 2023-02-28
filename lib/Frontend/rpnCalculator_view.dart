@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rpn_calculator_app/Backend/Command.dart';
+import 'package:rpn_calculator_app/Frontend/button_action.dart';
 
 import '../Backend/Stack.dart';
 
@@ -46,14 +47,14 @@ class _RPNCalculatorViewState extends State<RPNCalculatorView> {
     return Column(
       children: [
         Expanded(
-          flex: 3,
+          flex: 2,
           child: Center(
             child: Container(
               color: Colors.white10.withAlpha(10),
               child: Center(
                   child: (historical.historicalStack.length == 0) ? Text('') : Text(
                     historical.historicalStack.last.toString(),
-                    style: TextStyle(fontSize: 24, color: Colors.white),
+                    style: TextStyle(fontSize: 30, color: Colors.white),
                   ),
               ),
             ),
@@ -68,35 +69,12 @@ class _RPNCalculatorViewState extends State<RPNCalculatorView> {
             child: Container(
               child: Text(
                 numberOfStrings.join(''),
-                style: TextStyle(color: Colors.white, fontSize: 24),
+                style: TextStyle(color: Colors.white, fontSize: 30),
               ),
             ),
           ),
         ),
       ],
-    );
-  }
-
-  ScrollController controller = new ScrollController();
-  list() {
-    return Scaffold(
-      body: ListView.builder(
-          itemCount: historical.historicalStack.length,
-          controller: controller,
-          itemBuilder: (BuildContext context, int index) {
-            return Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: ListTile(
-                //trailing: Text('$index', style: TextStyle(color: Colors.green, fontSize: 15),),
-                title: Center(
-                  child: Text(
-                    historical.historicalStack[index].toString(),
-                    style: TextStyle(fontSize: 24, color: Colors.white),
-                  ),
-                ),
-              ),
-            );
-          }),
     );
   }
 
@@ -144,38 +122,27 @@ class _RPNCalculatorViewState extends State<RPNCalculatorView> {
         case '+':
           newValue = Addition(last, secondLast).execute();
           stack.push(newValue);
-          copyStack = [...stack.numbers];
-          historical.push(copyStack);
           break;
         case '-':
           newValue = Subtraction(last, secondLast).execute();
           stack.push(newValue);
-          copyStack = [...stack.numbers];
-          historical.push(copyStack);
           break;
         case '*':
-          newValue = Subtraction(last, secondLast).execute();
+          newValue = Multiply(last, secondLast).execute();
           stack.push(newValue);
-          copyStack = [...stack.numbers];
-          historical.push(copyStack);
           break;
         case '/':
-          newValue = Subtraction(last, secondLast).execute();
+          newValue = Division(last, secondLast).execute();
           stack.push(newValue);
-          copyStack = [...stack.numbers];
-          historical.push(copyStack);
           break;
       }
+      copyStack = [...stack.numbers];
+      historical.push(copyStack);
     });
 
   }
 
   void undo() {
-    controller.animateTo(
-      60.0 * historical.historicalStack.length,
-      duration: Duration(milliseconds: 500),
-      curve: Curves.easeIn,
-    );
     setState(() {
       historical.historicalStack.remove(historical.historicalStack.last);
       stack.numbers = [...historical.historicalStack.last];
@@ -291,83 +258,68 @@ class _RPNCalculatorViewState extends State<RPNCalculatorView> {
           children: [
             Padding(
               padding: EdgeInsets.all(globalPadding),
-              child: SizedBox(
+              child: CustomButton(
                 height: sizeBoxHeight,
                 width: sizeBoxWidth,
-                child: FloatingActionButton(
-                  backgroundColor: buttonsColor,
-                  onPressed: () {
-                    numberOfStrings.add('1');
-                    setState(() {
-                      numberOfStrings.join('');
-                    });
-                  },
-                  child: Text(
-                    '1',
-                    style: TextStyle(fontSize: 30, fontWeight: FontWeight.w900),
-                  ),
-                ),
+                fontColor: Colors.black,
+                fontSize: 30,
+                text: '1',
+                backGroundColor: buttonsColor,
+                onPressed: (){
+                  numberOfStrings.add('1');
+                  setState(() {
+                    numberOfStrings.join('');
+                  });
+                },
               ),
             ),
             Padding(
               padding: EdgeInsets.all(globalPadding),
-              child: SizedBox(
+              child: CustomButton(
                 height: sizeBoxHeight,
                 width: sizeBoxWidth,
-                child: FloatingActionButton(
-                  backgroundColor: buttonsColor,
-                  onPressed: () {
-                    numberOfStrings.add('2');
-                    setState(() {
-                      numberOfStrings.join('');
-                    });
-                  },
-                  child: Text(
-                    '2',
-                    style: TextStyle(fontSize: 30, fontWeight: FontWeight.w900),
-                  ),
-                ),
+                fontColor: Colors.black,
+                fontSize: 30,
+                text: '2',
+                backGroundColor: buttonsColor,
+                onPressed: (){
+                  numberOfStrings.add('2');
+                  setState(() {
+                    numberOfStrings.join('');
+                  });
+                },
               ),
             ),
             Padding(
               padding: EdgeInsets.all(globalPadding),
-              child: SizedBox(
+              child: CustomButton(
                 height: sizeBoxHeight,
                 width: sizeBoxWidth,
-                child: FloatingActionButton(
-                  backgroundColor: buttonsColor,
-                  onPressed: () {
-                    numberOfStrings.add('3');
-                    setState(() {
-                      numberOfStrings.join('');
-                    });
-                  },
-                  child: Text(
-                    '3',
-                    style: TextStyle(fontSize: 30, fontWeight: FontWeight.w900),
-                  ),
-                ),
+                fontColor: Colors.black,
+                fontSize: 30,
+                text: '3',
+                backGroundColor: buttonsColor,
+                onPressed: (){
+                  numberOfStrings.add('3');
+                  setState(() {
+                    numberOfStrings.join('');
+                  });
+                },
               ),
             ),
             Padding(
               padding: EdgeInsets.all(globalPadding),
-              child: SizedBox(
+              child: CustomButton(
                 height: sizeBoxHeight,
                 width: sizeBoxWidth,
-                child: FloatingActionButton(
-                  backgroundColor: buttonsColor,
-                  onPressed: () {
-                    operator = '+';
-                    calculation(operator);
-                  },
-                  child: Text(
-                    '+',
-                    style: TextStyle(
-                        fontSize: 30,
-                        fontWeight: FontWeight.w900,
-                        color: Colors.blue.shade700),
-                  ),
-                ),
+                fontColor: Colors.blue.shade700,
+                fontSize: 30,
+                text: '+',
+                backGroundColor: buttonsColor,
+                onPressed: (){
+                  operator = '+';
+                  calculation(operator);
+                },
               ),
             ),
           ],
@@ -377,83 +329,68 @@ class _RPNCalculatorViewState extends State<RPNCalculatorView> {
           children: [
             Padding(
               padding: EdgeInsets.all(globalPadding),
-              child: SizedBox(
+              child: CustomButton(
                 height: sizeBoxHeight,
                 width: sizeBoxWidth,
-                child: FloatingActionButton(
-                  backgroundColor: buttonsColor,
-                  onPressed: () {
-                    numberOfStrings.add('4');
-                    setState(() {
-                      numberOfStrings.join('');
-                    });
-                  },
-                  child: Text(
-                    '4',
-                    style: TextStyle(fontSize: 30, fontWeight: FontWeight.w900),
-                  ),
-                ),
+                fontColor: Colors.black,
+                fontSize: 30,
+                text: '4',
+                backGroundColor: buttonsColor,
+                onPressed: (){
+                  numberOfStrings.add('4');
+                  setState(() {
+                    numberOfStrings.join('');
+                  });
+                },
               ),
             ),
             Padding(
               padding: EdgeInsets.all(globalPadding),
-              child: SizedBox(
+              child: CustomButton(
                 height: sizeBoxHeight,
                 width: sizeBoxWidth,
-                child: FloatingActionButton(
-                  backgroundColor: buttonsColor,
-                  onPressed: () {
-                    numberOfStrings.add('5');
-                    setState(() {
-                      numberOfStrings.join('');
-                    });
-                  },
-                  child: Text(
-                    '5',
-                    style: TextStyle(fontSize: 30, fontWeight: FontWeight.w900),
-                  ),
-                ),
+                fontColor: Colors.black,
+                fontSize: 30,
+                text: '5',
+                backGroundColor: buttonsColor,
+                onPressed: (){
+                  numberOfStrings.add('5');
+                  setState(() {
+                    numberOfStrings.join('');
+                  });
+                },
               ),
             ),
             Padding(
               padding: EdgeInsets.all(globalPadding),
-              child: SizedBox(
+              child: CustomButton(
                 height: sizeBoxHeight,
                 width: sizeBoxWidth,
-                child: FloatingActionButton(
-                  backgroundColor: buttonsColor,
-                  onPressed: () {
-                    numberOfStrings.add('6');
-                    setState(() {
-                      numberOfStrings.join('');
-                    });
-                  },
-                  child: Text(
-                    '6',
-                    style: TextStyle(fontSize: 30, fontWeight: FontWeight.w900),
-                  ),
-                ),
+                fontColor: Colors.black,
+                fontSize: 30,
+                text: '6',
+                backGroundColor: buttonsColor,
+                onPressed: (){
+                  numberOfStrings.add('6');
+                  setState(() {
+                    numberOfStrings.join('');
+                  });
+                },
               ),
             ),
             Padding(
               padding: EdgeInsets.all(globalPadding),
-              child: SizedBox(
+              child: CustomButton(
                 height: sizeBoxHeight,
                 width: sizeBoxWidth,
-                child: FloatingActionButton(
-                  backgroundColor: buttonsColor,
-                  onPressed: () {
-                    operator = '-';
-                    calculation(operator);
-                  },
-                  child: Text(
-                    '-',
-                    style: TextStyle(
-                        fontSize: 30,
-                        fontWeight: FontWeight.w900,
-                        color: Colors.blue.shade700),
-                  ),
-                ),
+                fontColor: Colors.blue.shade700,
+                fontSize: 30,
+                text: '-',
+                backGroundColor: buttonsColor,
+                onPressed: (){
+                  operator = '-';
+                  calculation(operator);
+                },
               ),
             ),
           ],
@@ -463,83 +400,68 @@ class _RPNCalculatorViewState extends State<RPNCalculatorView> {
           children: [
             Padding(
               padding: EdgeInsets.all(globalPadding),
-              child: SizedBox(
+              child: CustomButton(
                 height: sizeBoxHeight,
                 width: sizeBoxWidth,
-                child: FloatingActionButton(
-                  backgroundColor: buttonsColor,
-                  onPressed: () {
-                    numberOfStrings.add('7');
-                    setState(() {
-                      numberOfStrings.join('');
-                    });
-                  },
-                  child: Text(
-                    '7',
-                    style: TextStyle(fontSize: 30, fontWeight: FontWeight.w900),
-                  ),
-                ),
+                fontColor: Colors.black,
+                fontSize: 30,
+                text: '7',
+                backGroundColor: buttonsColor,
+                onPressed: (){
+                  numberOfStrings.add('7');
+                  setState(() {
+                    numberOfStrings.join('');
+                  });
+                },
               ),
             ),
             Padding(
               padding: EdgeInsets.all(globalPadding),
-              child: SizedBox(
+              child: CustomButton(
                 height: sizeBoxHeight,
                 width: sizeBoxWidth,
-                child: FloatingActionButton(
-                  backgroundColor: buttonsColor,
-                  onPressed: () {
-                    numberOfStrings.add('8');
-                    setState(() {
-                      numberOfStrings.join('');
-                    });
-                  },
-                  child: Text(
-                    '8',
-                    style: TextStyle(fontSize: 30, fontWeight: FontWeight.w900),
-                  ),
-                ),
+                fontColor: Colors.black,
+                fontSize: 30,
+                text: '8',
+                backGroundColor: buttonsColor,
+                onPressed: (){
+                  numberOfStrings.add('8');
+                  setState(() {
+                    numberOfStrings.join('');
+                  });
+                },
               ),
             ),
             Padding(
               padding: EdgeInsets.all(globalPadding),
-              child: SizedBox(
+              child: CustomButton(
                 height: sizeBoxHeight,
                 width: sizeBoxWidth,
-                child: FloatingActionButton(
-                  backgroundColor: buttonsColor,
-                  onPressed: () {
-                    numberOfStrings.add('9');
-                    setState(() {
-                      numberOfStrings.join('');
-                    });
-                  },
-                  child: Text(
-                    '9',
-                    style: TextStyle(fontSize: 30, fontWeight: FontWeight.w900),
-                  ),
-                ),
+                fontColor: Colors.black,
+                fontSize: 30,
+                text: '9',
+                backGroundColor: buttonsColor,
+                onPressed: (){
+                  numberOfStrings.add('9');
+                  setState(() {
+                    numberOfStrings.join('');
+                  });
+                },
               ),
             ),
             Padding(
               padding: EdgeInsets.all(globalPadding),
-              child: SizedBox(
+              child: CustomButton(
                 height: sizeBoxHeight,
                 width: sizeBoxWidth,
-                child: FloatingActionButton(
-                  backgroundColor: buttonsColor,
-                  onPressed: () {
-                    operator = '/';
-                    calculation(operator);
-                  },
-                  child: Text(
-                    '/',
-                    style: TextStyle(
-                        fontSize: 30,
-                        fontWeight: FontWeight.w900,
-                        color: Colors.blue.shade700),
-                  ),
-                ),
+                fontColor: Colors.blue.shade700,
+                fontSize: 30,
+                text: '/',
+                backGroundColor: buttonsColor,
+                onPressed: (){
+                  operator = '/';
+                  calculation(operator);
+                },
               ),
             ),
           ],
@@ -549,80 +471,65 @@ class _RPNCalculatorViewState extends State<RPNCalculatorView> {
           children: [
             Padding(
               padding: EdgeInsets.all(globalPadding),
-              child: SizedBox(
+              child: CustomButton(
                 height: sizeBoxHeight,
                 width: sizeBoxWidth,
-                child: FloatingActionButton(
-                  backgroundColor: buttonsColor,
-                  onPressed: () {
-                    undo();
-                  },
-                  child: Text(
-                    'Undo',
-                    style: TextStyle(fontSize: 20, color: Colors.orange,fontWeight: FontWeight.w900),
-                  ),
-                ),
+                fontColor: Colors.orangeAccent,
+                fontSize: 20,
+                text: 'Undo',
+                backGroundColor: buttonsColor,
+                onPressed: (){
+                  undo();
+                },
               ),
             ),
             Padding(
               padding: EdgeInsets.all(globalPadding),
-              child: SizedBox(
+              child: CustomButton(
                 height: sizeBoxHeight,
                 width: sizeBoxWidth,
-                child: FloatingActionButton(
-                  backgroundColor: buttonsColor,
-                  onPressed: () {
-                    numberOfStrings.add('0');
-                    setState(() {
-                      numberOfStrings.join('');
-                    });
-                  },
-                  child: Text(
-                    '0',
-                    style: TextStyle(fontSize: 30, fontWeight: FontWeight.w900),
-                  ),
-                ),
+                fontColor: Colors.black,
+                fontSize: 30,
+                text: '0',
+                backGroundColor: buttonsColor,
+                onPressed: (){
+                  numberOfStrings.add('0');
+                  setState(() {
+                    numberOfStrings.join('');
+                  });
+                },
               ),
             ),
             Padding(
               padding: EdgeInsets.all(globalPadding),
-              child: SizedBox(
+              child: CustomButton(
                 height: sizeBoxHeight,
                 width: sizeBoxWidth,
-                child: FloatingActionButton(
-                  backgroundColor: buttonsColor,
-                  onPressed: () {
-                    numberOfStrings.add('.');
-                    setState(() {
-                      numberOfStrings.join('');
-                    });
-                  },
-                  child: Text(
-                    '.',
-                    style: TextStyle(fontSize: 30, fontWeight: FontWeight.w900),
-                  ),
-                ),
+                fontColor: Colors.black,
+                fontSize: 30,
+                text: '.',
+                backGroundColor: buttonsColor,
+                onPressed: (){
+                  numberOfStrings.add('.');
+                  setState(() {
+                    numberOfStrings.join('');
+                  });
+                },
               ),
             ),
             Padding(
               padding: EdgeInsets.all(globalPadding),
-              child: SizedBox(
+              child: CustomButton(
                 height: sizeBoxHeight,
                 width: sizeBoxWidth,
-                child: FloatingActionButton(
-                  backgroundColor: buttonsColor,
-                  onPressed: () {
-                    operator = '*';
-                    calculation(operator);
-                  },
-                  child: Text(
-                    '*',
-                    style: TextStyle(
-                        fontSize: 30,
-                        fontWeight: FontWeight.w900,
-                        color: Colors.blue.shade700),
-                  ),
-                ),
+                fontColor: Colors.blue.shade700,
+                fontSize: 30,
+                text: '*',
+                backGroundColor: buttonsColor,
+                onPressed: (){
+                  operator = '*';
+                  calculation(operator);
+                },
               ),
             ),
           ],
