@@ -35,11 +35,6 @@ class StackNum extends IStack{
   void clear() {
     numbers.clear();
   }
-
-  @override
-  String toString() {
-    return numbers.join(', ');
-  }
 }
 
 class HistoricalStack{
