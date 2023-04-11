@@ -12,7 +12,7 @@ class RPNCalculatorView extends StatefulWidget {
 }
 
 class _RPNCalculatorViewState extends State<RPNCalculatorView> {
-  CalculatorState _calculatorState = CalculatorState();
+  final CalculatorState _calculatorState = CalculatorState();
 
   @override
   Widget build(BuildContext context) {
