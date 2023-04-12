@@ -14,8 +14,8 @@ class CalculationScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const double sizeBoxHeight = 75;
-    const double sizeBoxWidth = 75;
+    const double sizeBoxHeight = 60;
+    const double sizeBoxWidth = 60;
     const Color buttonsColor = Colors.white10;
     const double globalPadding = 4;
     return Column(
@@ -70,8 +70,8 @@ class CalculationScreen extends StatelessWidget {
                 padding: EdgeInsets.all(globalPadding),
                 child: InkWell(
                   onTap: () {
-                    _calState.numberOfStrings.remove(
-                        _calState.numberOfStrings.last);
+                    _calState.numberOfStrings
+                        .remove(_calState.numberOfStrings.last);
                     _update();
                   },
                   borderRadius: BorderRadius.all(Radius.circular(50.0)),
@@ -82,8 +82,8 @@ class CalculationScreen extends StatelessWidget {
                     child: Container(
                       decoration: BoxDecoration(
                           color: Colors.white10.withAlpha(20),
-                          borderRadius: BorderRadius.all(
-                              Radius.circular(50.0))),
+                          borderRadius:
+                              BorderRadius.all(Radius.circular(50.0))),
                       child: Center(
                         child: Text(
                           "C",
@@ -118,8 +118,8 @@ class CalculationScreen extends StatelessWidget {
                     child: Container(
                       decoration: BoxDecoration(
                           color: Colors.white10.withAlpha(20),
-                          borderRadius: BorderRadius.all(
-                              Radius.circular(50.0))),
+                          borderRadius:
+                              BorderRadius.all(Radius.circular(50.0))),
                       child: Center(
                         child: Text(
                           "AC",
@@ -143,6 +143,7 @@ class CalculationScreen extends StatelessWidget {
             Padding(
               padding: EdgeInsets.all(globalPadding),
               child: CustomButton(
+                key: ValueKey('btn1'),
                 height: sizeBoxHeight,
                 width: sizeBoxWidth,
                 fontColor: Colors.black,
@@ -159,6 +160,7 @@ class CalculationScreen extends StatelessWidget {
             Padding(
               padding: EdgeInsets.all(globalPadding),
               child: CustomButton(
+                key: ValueKey('btn2'),
                 height: sizeBoxHeight,
                 width: sizeBoxWidth,
                 fontColor: Colors.black,
@@ -175,6 +177,7 @@ class CalculationScreen extends StatelessWidget {
             Padding(
               padding: EdgeInsets.all(globalPadding),
               child: CustomButton(
+                key: ValueKey('btn3'),
                 height: sizeBoxHeight,
                 width: sizeBoxWidth,
                 fontColor: Colors.black,
@@ -191,6 +194,7 @@ class CalculationScreen extends StatelessWidget {
             Padding(
               padding: EdgeInsets.all(globalPadding),
               child: CustomButton(
+                key: ValueKey('btnAddition'),
                 height: sizeBoxHeight,
                 width: sizeBoxWidth,
                 fontColor: Colors.blue.shade700,
@@ -211,6 +215,7 @@ class CalculationScreen extends StatelessWidget {
             Padding(
               padding: EdgeInsets.all(globalPadding),
               child: CustomButton(
+                key: ValueKey('btn4'),
                 height: sizeBoxHeight,
                 width: sizeBoxWidth,
                 fontColor: Colors.black,
@@ -227,6 +232,7 @@ class CalculationScreen extends StatelessWidget {
             Padding(
               padding: EdgeInsets.all(globalPadding),
               child: CustomButton(
+                key: ValueKey('btn5'),
                 height: sizeBoxHeight,
                 width: sizeBoxWidth,
                 fontColor: Colors.black,
@@ -243,6 +249,7 @@ class CalculationScreen extends StatelessWidget {
             Padding(
               padding: EdgeInsets.all(globalPadding),
               child: CustomButton(
+                key: ValueKey('btn6'),
                 height: sizeBoxHeight,
                 width: sizeBoxWidth,
                 fontColor: Colors.black,
@@ -259,6 +266,7 @@ class CalculationScreen extends StatelessWidget {
             Padding(
               padding: EdgeInsets.all(globalPadding),
               child: CustomButton(
+                key: ValueKey('btnSubtraction'),
                 height: sizeBoxHeight,
                 width: sizeBoxWidth,
                 fontColor: Colors.blue.shade700,
@@ -279,6 +287,7 @@ class CalculationScreen extends StatelessWidget {
             Padding(
               padding: EdgeInsets.all(globalPadding),
               child: CustomButton(
+                key: ValueKey('btn7'),
                 height: sizeBoxHeight,
                 width: sizeBoxWidth,
                 fontColor: Colors.black,
@@ -295,6 +304,7 @@ class CalculationScreen extends StatelessWidget {
             Padding(
               padding: EdgeInsets.all(globalPadding),
               child: CustomButton(
+                key: ValueKey('btn8'),
                 height: sizeBoxHeight,
                 width: sizeBoxWidth,
                 fontColor: Colors.black,
@@ -311,6 +321,7 @@ class CalculationScreen extends StatelessWidget {
             Padding(
               padding: EdgeInsets.all(globalPadding),
               child: CustomButton(
+                key: ValueKey('btn9'),
                 height: sizeBoxHeight,
                 width: sizeBoxWidth,
                 fontColor: Colors.black,
@@ -327,6 +338,7 @@ class CalculationScreen extends StatelessWidget {
             Padding(
               padding: EdgeInsets.all(globalPadding),
               child: CustomButton(
+                key: ValueKey('btnDivision'),
                 height: sizeBoxHeight,
                 width: sizeBoxWidth,
                 fontColor: Colors.blue.shade700,
@@ -347,6 +359,7 @@ class CalculationScreen extends StatelessWidget {
             Padding(
               padding: EdgeInsets.all(globalPadding),
               child: CustomButton(
+                key: ValueKey('btnUndo'),
                 height: sizeBoxHeight,
                 width: sizeBoxWidth,
                 fontColor: Colors.orangeAccent,
@@ -354,8 +367,11 @@ class CalculationScreen extends StatelessWidget {
                 text: 'Undo',
                 backGroundColor: buttonsColor,
                 onPressed: () {
-                  _calState.historical.historicalStack.remove(_calState.historical.historicalStack.last);
-                  _calState.stack.numbers = [..._calState.historical.historicalStack.last];
+                  _calState.historical.historicalStack
+                      .remove(_calState.historical.historicalStack.last);
+                  _calState.stack.numbers = [
+                    ..._calState.historical.historicalStack.last
+                  ];
                   _update();
                 },
               ),
@@ -363,6 +379,7 @@ class CalculationScreen extends StatelessWidget {
             Padding(
               padding: EdgeInsets.all(globalPadding),
               child: CustomButton(
+                key: ValueKey('btn0'),
                 height: sizeBoxHeight,
                 width: sizeBoxWidth,
                 fontColor: Colors.black,
@@ -379,6 +396,7 @@ class CalculationScreen extends StatelessWidget {
             Padding(
               padding: EdgeInsets.all(globalPadding),
               child: CustomButton(
+                key: ValueKey('btnPeriod'),
                 height: sizeBoxHeight,
                 width: sizeBoxWidth,
                 fontColor: Colors.black,
@@ -386,7 +404,7 @@ class CalculationScreen extends StatelessWidget {
                 text: '.',
                 backGroundColor: buttonsColor,
                 onPressed: () {
-                  if(!_calState.numberOfStrings.contains('.')){
+                  if (!_calState.numberOfStrings.contains('.')) {
                     _calState.numberOfStrings.add('.');
                     _calState.numberOfStrings.join('');
                   }
@@ -397,6 +415,7 @@ class CalculationScreen extends StatelessWidget {
             Padding(
               padding: EdgeInsets.all(globalPadding),
               child: CustomButton(
+                key: ValueKey('btnMultiply'),
                 height: sizeBoxHeight,
                 width: sizeBoxWidth,
                 fontColor: Colors.blue.shade700,
@@ -418,8 +437,8 @@ class CalculationScreen extends StatelessWidget {
   void calculation(String operator) {
     num newValue;
     num last = _calState.stack.numbers.last;
-    num secondLast = _calState.stack.numbers.elementAt(
-        _calState.stack.numbers.length - 2);
+    num secondLast =
+        _calState.stack.numbers.elementAt(_calState.stack.numbers.length - 2);
     _calState.stack.numbers.remove(last);
     _calState.stack.numbers.remove(secondLast);
     switch (operator) {
@@ -444,4 +463,3 @@ class CalculationScreen extends StatelessWidget {
     _calState.historical.push(_calState.copyStack);
   }
 }
-

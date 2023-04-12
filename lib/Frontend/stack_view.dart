@@ -8,17 +8,14 @@ class StackScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
+    return Flexible(
+      fit: FlexFit.tight,
       flex: 2,
       child: Center(
-        child: FittedBox(
-          fit: BoxFit.scaleDown,
-          child: Center(
-            child: (historical.historicalStack.length == 0) ? Text('') : Text(
-              historical.historicalStack.last.toString(),
-              style: TextStyle(fontSize: 30, color: Colors.white),
-            ),
-          ),
+        child: (historical.historicalStack.length == 0) ? Text('') : Text(
+          historical.historicalStack.last.toString(),
+          softWrap: true,
+          style: TextStyle(fontSize: 30, color: Colors.white),
         ),
       ),
     );

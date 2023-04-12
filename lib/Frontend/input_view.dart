@@ -12,9 +12,9 @@ class InputScreen extends StatelessWidget {
         child: FittedBox(
           fit: BoxFit.scaleDown,
           child: Container(
-            child: (numberOfStrings.length == 0) ? Text('0', style: TextStyle(color: Colors.white, fontSize: 30)):Text(
+            child: (numberOfStrings.isEmpty) ? const Text(key: ValueKey('input'),'0', style: TextStyle(color: Colors.white, fontSize: 30)):Text(key: ValueKey('input'),
               numberOfStrings.join(''),
-              style: TextStyle(color: Colors.white, fontSize: 30),
+              style: const TextStyle(color: Colors.white, fontSize: 30),
             ),
           ),
         ),
