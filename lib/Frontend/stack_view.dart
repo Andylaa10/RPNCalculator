@@ -4,6 +4,7 @@ import '../Backend/Stack.dart';
 
 class StackScreen extends StatelessWidget {
   final HistoricalStack historical;
+
   const StackScreen(this.historical, {Key? key}) : super(key: key);
 
   @override
@@ -12,11 +13,14 @@ class StackScreen extends StatelessWidget {
       fit: FlexFit.tight,
       flex: 2,
       child: Center(
-        child: (historical.historicalStack.length == 0) ? Text('') : Text(
-          historical.historicalStack.last.toString(),
-          softWrap: true,
-          style: TextStyle(fontSize: 30, color: Colors.white),
-        ),
+        child: (historical.historicalStack.isEmpty)
+            ? const Text(key: ValueKey('stack'), '')
+            : Text(
+                key: ValueKey('stack'),
+                historical.historicalStack.last.toString(),
+                softWrap: true,
+                style: TextStyle(fontSize: 30, color: Colors.white),
+              ),
       ),
     );
   }

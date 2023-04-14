@@ -23,6 +23,7 @@ class CalculationScreen extends StatelessWidget {
         Padding(
           padding: EdgeInsets.all(globalPadding),
           child: InkWell(
+            key: ValueKey('btnEnter'),
             onTap: () {
               /// This method enables us to write an infinite digit number
               /// By joining the elements in the list together
@@ -69,6 +70,7 @@ class CalculationScreen extends StatelessWidget {
               child: Padding(
                 padding: EdgeInsets.all(globalPadding),
                 child: InkWell(
+                  key: ValueKey('btnClear'),
                   onTap: () {
                     _calState.numberOfStrings
                         .remove(_calState.numberOfStrings.last);
@@ -104,6 +106,7 @@ class CalculationScreen extends StatelessWidget {
               child: Padding(
                 padding: EdgeInsets.all(globalPadding),
                 child: InkWell(
+                  key: ValueKey('btnClearAll'),
                   onTap: () {
                     _calState.stack.clear();
                     _calState.historical.clear();
